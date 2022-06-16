@@ -75,3 +75,164 @@ _#_#
 #_#_
 */
 
+
+// QUESTION 1c
+// Create an object named "example" with a key "sentence" that has a value of the string "TODAY IS AN AWESOME DAY FOR CODING!"
+// */
+
+const example = {
+  sentence: 'TODAY IS AN AWESOME DAY FOR CODING'
+};
+
+// console.log(example) //=> sentence: 
+
+
+/*
+QUESTION 2c
+Create a function "fixTitle" that take an argument (a string). Your job is to have the function
+return the string in title case/style, meaning that each word is capitalized (all other letters in the word are lowercase).
+Assume passive words like "the", "and", "to" are also going to be capitazlized.
+
+example:
+input: "THE HiSTory of mathematiCS"
+output: "The History Of Mathematics"
+
+Test your fixTile function by passing in the sentence value of your "example" object.
+*/
+
+//i: string 
+//o: string
+
+// create a function 'fixTitle', 1 param (string)
+function fixTitle (string){
+  	// turn our string argument into lowercase, and then turn into an array(seperate by each word , ' ')
+  let newStr = string.toLowerCase().split(' '); 
+	//iterate thru the updated array 
+  let output = newStr.map(el => (el[0].toUpperCase() + el.slice(1))); 
+		// turn the first index of each element of the array to uppercase 
+
+	// turn the array back into a string, seperated by ' ', 
+	
+// return the string
+  return output.join(' ');  
+}
+
+console.log(fixTitle(example.sentence)) //=> 'Today Is An Awesome Day For Coding'
+//console.log(example.sentence)
+
+/*
+QUESTION 3c
+The bookstore has a list of books but they are not titled correctly since the book titles should be in title case/style.
+
+const books = [
+ {title: "the midnight sky", author: "Samuel Goodens"},
+ {title: "technology In THE age of artificial intelligenge", author: "Lara Del Rio"},
+ {title: "never GIVE up", author: "Michelle Li"} 
+];
+
+Write a function that uses your "fixTitle" function to fix each title and return an array of strings where each entry is the fixed title.
+
+example output: ["The Midnight Sky", "Technology In The Age Of Artificial Intelligenge", "Never Give Up" ]
+*/
+
+//i: array  
+//o: array 
+
+// create a function that takes one param array 
+function bookTittle(array) {
+  // creat a cache array to store result 
+	const bookNames = []; 
+	// iterate thru our array 
+  
+  for (let i = 0; i < array.length; i++){
+    	// change the tittle by invoking the function fixtitle
+    // push the new value of the key to our cache array 
+  bookNames.push(array[i]['title'])
+  }
+  
+  return bookNames.map(el => fixTitle(el))
+  // create a cache array to store our output 
+}
+
+const books = [
+ {title: "the midnight sky", author: "Samuel Goodens"},
+ {title: "technology In THE age of artificial intelligenge", author: "Lara Del Rio"},
+ {title: "never GIVE up", author: "Michelle Li"} 
+];
+
+//console.log(bookTittle(books)) //=>["The Midnight Sky", "Technology In The Age Of Artificial Intelligenge", "Never Give Up" ]
+
+/*
+QUESTION 4c
+Create a function "checklist" that will take an array as argument (an array of food items). "checklist" should return a function "purchased" that
+also takes an array of food items as an argument. If all items did not get purchased, return "{allPurchased: false, missing: [<missing items>]}".
+If all food items were purchashed, {allPurchased: true, missing: []}
+
+Example:
+const func = checklist(["apple", "rice", "wine"])
+func(["mango", "bread", "lettuce", "apple"]) // expected: {allPurchased: false, missing: ["rice", "wine"]}
+func(["rice", "bread", "wine", "lettuce", "apple"]) // expected: {allPurchased: true, missing: []}
+
+*/
+
+//i: array 
+//o: function 
+	//i: array 
+	//o: object
+
+// create a function checklist 1 param (array)
+function checklist (checkListItem){
+  	//return a fucntion that also takes 1 apram (array)
+  	return function purchased (purchasedItem){
+      // create an obj to store as output
+      		// key of allPurchased, true
+      		// key of missing item, []
+      const output = {
+        allPurchased: true, 
+        missing: []
+      }
+      // check the array passed in to our returned function to the array passed in our outter function
+			// iterate thru our outer array
+      for (let i = 0; i < checkListItem.length; i++) {
+        // if passed in array in return function does not include any elements in the array passed in in outer 
+        if (!purchasedItem.includes(checkListItem[i])) {
+          	// set all Purchased as false 
+          	output.allPurchased = false; 
+						// push missing items to our missing items array 
+          	output.missing.push(checkListItem[i])
+        }
+					
+				// if everything is purchased, we want to set purchased to true 
+       
+      }
+			return output
+    }
+		
+}
+const func = checklist(["apple", "rice", "wine"])
+console.log(func(["mango", "bread", "lettuce", "apple"]))// expected: {allPurchased: false, missing: ["rice", "wine"]}
+console.log(func(["rice", "bread", "wine", "lettuce", "apple"])) // expected: {allPurchased: true, missing: []}
+
+
+/*
+Question 10a
+Write a function 'rotateGrid' that is given an NxN grid of elements represented by a 2D array, and outputs a grid equivalent to the same grid rotated 90 degrees clockwise.
+Example:
+const sampleGrid = [ [1, 2, 3],
+                    [4, 5, 6],
+                    [7, 8, 9] ]
+console.log(rotateGrid(sampleGrid)); // -> [[7, 4, 1],
+                                           [8, 5, 2],
+                                           [9, 6, 3] ]
+*/
+
+
+/*
+Question 6c
+Write a function that provided n (a number) as input, will return a string representing a chessboard of n x n squares.
+
+_#_#
+#_#_
+_#_#
+#_#_
+*/
