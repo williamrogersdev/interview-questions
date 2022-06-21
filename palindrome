@@ -4,3 +4,15 @@ string is a palindrome
 (a palindrome is any string that has the same value when reversed - for example, "LEVEL" or "RACECAR")
 */
 
+
+
+function pal (str) {
+  let rev = [...str].reverse().join('')
+  console.log(rev)
+   if (str === rev) {
+     return true
+   }
+  return false
+  
+}
+console.log(pal('level'))
